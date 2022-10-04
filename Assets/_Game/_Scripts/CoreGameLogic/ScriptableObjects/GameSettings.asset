@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a787ec62bfa61684caf95074627c2e13, type: 3}
+  m_Name: GameSettings
+  m_EditorClassIdentifier: 
+  musicVolume: 1
+  sfxVolume: 1
+  masterVolume: 1
+  gameOvertime: 5
+  gameStartDelay: 3
+  gameEndDelay: 3
+  gameTimer: 20
+  maxPlayers: 4
+  minPlayers: 1
+  coinSpawnDelayMin: 5
+  coinSpawnDelayMax: 5
+  coinSpawnAmountMax: 5
+  maxCoinsinScene: 2
+  playerPrefabs: {fileID: 2645229757744679221, guid: 6a281ad567dcac4489697b2640163db1,
+    type: 3}
+  playerScoreUI: {fileID: -6294034666387017566, guid: ec7c3e090e0ee2841a42b2a230f2c11f,
+    type: 3}

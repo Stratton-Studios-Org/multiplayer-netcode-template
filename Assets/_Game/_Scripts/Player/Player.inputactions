@@ -1,0 +1,34 @@
+{
+    "name": "Player",
+    "maps": [
+        {
+            "name": "Move",
+            "id": "1f94e156-226d-4c01-b65d-379be6be0a78",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "71e5713c-e94e-450e-a1f8-05fda5780fa5",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "628490c3-f1f8-4932-9fa0-e0888a807261",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
