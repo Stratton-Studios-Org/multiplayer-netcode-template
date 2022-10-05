@@ -14,7 +14,7 @@ public class NetManage : NetworkBehaviour
     private ulong playerIDs;
     
     
-   [SerializeField] public NetworkList<ISessionPlayerData> playerList = new NetworkList<ISessionPlayerData>();
+   [SerializeField] public NetworkList<SessionPlayerData> playerList = new NetworkList<SessionPlayerData>();
     
     public  EventHandler OnAllPlayersConnected;
 
@@ -39,7 +39,7 @@ public class NetManage : NetworkBehaviour
         if (IsServer)
         {
             GameManager g = FindObjectOfType<GameManager>();
-            g.LastGameCleanUpCheckMulti();
+            GamePlayEventManager.GameCleanUpInvoke();
         }
         
     }
@@ -89,7 +89,7 @@ public class NetManage : NetworkBehaviour
          {
              if (playerList[i].ClientID == clientId)
              {
-                 playerList[i]= new ISessionPlayerData(playerList[i].playerScore, playerList[i].systemID,false, playerList[i].ClientID, playerList[i].playerObject);
+                 playerList[i]= new SessionPlayerData(playerList[i].playerScore, playerList[i].systemID,false, playerList[i].ClientID, playerList[i].playerObject);
              }
          }
          networkManager.ConnectedClients.TryGetValue(clientId, out var networkedClient);
@@ -156,7 +156,7 @@ public class NetManage : NetworkBehaviour
           networkManager.ConnectedClients.TryGetValue(clientId, out var networkedClient);
          var v =  networkedClient.PlayerObject.GetComponent<NetworkObject>();
 
-         playerList.Add(new ISessionPlayerData() { IsConnected = true,  ClientID = clientId, playerObject = v});
+         playerList.Add(new SessionPlayerData() { IsConnected = true,  ClientID = clientId, playerObject = v});
          
          Debug.Log("Added player data" + clientId + playerList.Count);
      }
@@ -165,11 +165,11 @@ public class NetManage : NetworkBehaviour
      
      private void RemovePlayerData(ulong clientId)
      {
-       //  ISessionPlayerData playerData = playerList.Find(x => x.ClientID == clientId);
+       //  SessionPlayerData playerData = playerList.Find(x => x.ClientID == clientId);
             
          var v = GetPlayerDataBasedOnClientID(clientId);
 
-         ISessionPlayerData playerData = v;
+         SessionPlayerData playerData = v;
 
          playerList.Remove(playerData);
 
@@ -185,7 +185,7 @@ public class NetManage : NetworkBehaviour
         ///
         /// new josh
         ///
-        public ISessionPlayerData GetPlayerDataBasedOnSystemID(FixedString128Bytes guid)
+        public SessionPlayerData GetPlayerDataBasedOnSystemID(FixedString128Bytes guid)
         {
             foreach (var VARIABLE in playerList)
             {
@@ -196,10 +196,10 @@ public class NetManage : NetworkBehaviour
                 }
             }
 
-            return new ISessionPlayerData{systemID = "null"};
+            return new SessionPlayerData{systemID = "null"};
         }
         
-        public ISessionPlayerData GetPlayerDataBasedOnClientID(ulong Clientid)
+        public SessionPlayerData GetPlayerDataBasedOnClientID(ulong Clientid)
         {
             foreach (var VARIABLE in playerList)
             {
@@ -210,7 +210,7 @@ public class NetManage : NetworkBehaviour
                 }
             }
 
-            return new ISessionPlayerData{systemID = "null"};
+            return new SessionPlayerData{systemID = "null"};
         }
         
         public bool CheckIfPlayerIDMatches(ulong clientid)
@@ -281,10 +281,10 @@ public class NetManage : NetworkBehaviour
         }
         
 
-        public List<ISessionPlayerData> GetAllPlayerData()
+        public List<SessionPlayerData> GetAllPlayerData()
         {
 
-            var v = new List<ISessionPlayerData>();
+            var v = new List<SessionPlayerData>();
             
             foreach (var VARIABLE in playerList)
             {
@@ -297,10 +297,10 @@ public class NetManage : NetworkBehaviour
 
         }
         
-        public List<ISessionPlayerData> GetAllPlayerDataConnected()
+        public List<SessionPlayerData> GetAllPlayerDataConnected()
         {
 
-            var v = new List<ISessionPlayerData>();
+            var v = new List<SessionPlayerData>();
             
             foreach (var VARIABLE in playerList)
             {

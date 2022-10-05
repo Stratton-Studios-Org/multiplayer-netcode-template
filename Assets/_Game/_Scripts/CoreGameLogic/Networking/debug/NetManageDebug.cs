@@ -25,14 +25,14 @@ public class NetManageDebug : MonoBehaviour
                 if(netManager.playerList == null){return;}
 
 //                Debug.Log(netManager.GetTotalNumberOfConnectedPlayers());
-               //netManager.playerList[0] = new ISessionPlayerData(10,"test", false, 2, NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<NetworkObject>());
+               //netManager.playerList[0] = new SessionPlayerData(10,"test", false, 2, NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<NetworkObject>());
                 
-                // foreach(ISessionPlayerData player in netManager.playerList)
-                // {
-                //
-                //     check(player);
-                //
-                // }
+                 foreach(SessionPlayerData player in netManager.playerList)
+                 {
+                
+                     check(player);
+                
+                 }
             }else
             {
                 Debug.Log("netmanager is null");
@@ -41,7 +41,7 @@ public class NetManageDebug : MonoBehaviour
 
     }
 
-    void check(ISessionPlayerData player)
+    void check(SessionPlayerData player)
     {
         foreach (var VARIABLE in localref)
         {
@@ -58,7 +58,7 @@ public class NetManageDebug : MonoBehaviour
     }
 
 
-    void updateplayer(localreference newplayer, ISessionPlayerData player)
+    void updateplayer(localreference newplayer, SessionPlayerData player)
     {
         newplayer.IsConnected = player.IsConnected;
         newplayer.playerScore = player.playerScore;
@@ -66,7 +66,7 @@ public class NetManageDebug : MonoBehaviour
         newplayer.systemID = player.systemID;
     }
     
-    void Addplayer(ISessionPlayerData player)
+    void Addplayer(SessionPlayerData player)
     {
         var newplayer = new localreference();
         newplayer.IsConnected = player.IsConnected;

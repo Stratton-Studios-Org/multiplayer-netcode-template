@@ -19,7 +19,24 @@ public class RPCManager : NetworkBehaviour
         anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
     }
-    
+
+    public override void OnNetworkDespawn()
+    {
+        base.OnNetworkDespawn();
+        GamePlayEventManager.GameEndEvent -= WinnerAnimState;
+
+
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+     var g =   GameManager.FindObjectOfType<GameManager>();
+     GamePlayEventManager.GameEndEvent += WinnerAnimState;
+
+
+    }
+
     [ServerRpc]
     public void PlayerInputServerRpc(float x,float y, ServerRpcParams serverRpcParams = default)
     {
@@ -53,9 +70,10 @@ public class RPCManager : NetworkBehaviour
         player.SimpleMove(scaledMovement);
     }
 
-   public void WinnerAnimState(ulong winnerId)
+   public void WinnerAnimState()
    {
-       Debug.Log(winnerId);
+       var winnerId =  GameManager.FindObjectOfType<GameManager>().getWinner();
+      Debug.Log(winnerId);
         foreach (var VARIABLE in players_anims)
         {
            // Debug.Log(winnerId + "||" + VARIABLE.Key);

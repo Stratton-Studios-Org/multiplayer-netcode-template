@@ -9,7 +9,7 @@ using Unity.Netcode;
 [Serializable]
 public class PlayerScoreBoard
 {
- //   public  ISessionPlayerData playerData;
+ //   public  SessionPlayerData playerData;
     public string playerName = "";
     public GameObject playerObject;
     public PlayerScoreUI playerScoreUI;

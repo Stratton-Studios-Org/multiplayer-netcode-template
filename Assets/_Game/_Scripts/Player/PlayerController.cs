@@ -132,7 +132,7 @@ public class PlayerController : NetworkBehaviour {
     public override void OnNetworkSpawn() {
         if (!IsOwner) Destroy(this);
         
-        EventManager.OnGameEnd += OnGameEnd;
+        GamePlayEventManager.GameEndEvent += GameEndEvent;
 
         if (IsOwner && !IsServer)
         {
@@ -141,7 +141,8 @@ public class PlayerController : NetworkBehaviour {
                 _gameManager = GameObject.FindObjectOfType<GameManager>();
             }
             
-            _gameManager.OnPlayerSpawned(_networkManager.LocalClient.ClientId);
+          //  _gameManager.spawnController.OnPlayerSpawned(_networkManager.LocalClient.ClientId);
+            _gameManager.PlayerSpawned(_networkManager.LocalClient.ClientId);
         }else if(IsServer)
         {
             if(_gameManager == null)
@@ -149,12 +150,13 @@ public class PlayerController : NetworkBehaviour {
                 _gameManager = GameObject.FindObjectOfType<GameManager>();
             }
            
-            _gameManager.OnPlayerSpawned(GetComponent<NetworkObject>().NetworkObjectId);
+           // _gameManager.spawnController.OnPlayerSpawned(GetComponent<NetworkObject>().NetworkObjectId);
+            _gameManager.PlayerSpawned(GetComponent<NetworkObject>().NetworkObjectId);
         }
         
     }
 
-    void OnGameEnd()
+    void GameEndEvent()
     {
         
     }
